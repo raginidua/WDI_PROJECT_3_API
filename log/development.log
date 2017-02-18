@@ -159,3 +159,1106 @@ puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
 puma (3.7.0) lib/puma/server.rb:415:in `process_client'
 puma (3.7.0) lib/puma/server.rb:275:in `block in run'
 puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (18.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (6.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (48.8ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (13.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (6.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.2ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ragini@ragini.com"], ["LIMIT", 1]]
+  [1m[35mSQL (15.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "ragini@ragini.com"], ["password_digest", "$2a$10$LAYRMbMQbuVhH18sv8qup.HzBgz9Hoc/5ndsF5WxCNdyozJzssbs2"], ["first_name", "Ragini"], ["last_name", "Dua"], ["username", "raginidua"], ["created_at", 2017-02-17 16:59:22 UTC], ["updated_at", 2017-02-17 16:59:22 UTC], ["role", "Artist"]]
+  [1m[35m (11.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (124.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (121.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (335.5ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (242.1ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (5.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.0ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (6.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-17 17:00:19 UTC], ["updated_at", 2017-02-17 17:00:19 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ragini@ragini.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "ragini@ragini.com"], ["password_digest", "$2a$10$/YKpZq8MeG0gXXecyPxt2eZnu3kERmy7QLOURSrClr6F/RB/ZHdwa"], ["first_name", "Ragini"], ["last_name", "Dua"], ["username", "raginidua"], ["created_at", 2017-02-17 17:00:34 UTC], ["updated_at", 2017-02-17 17:00:34 UTC], ["role", "Artist"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (27.9ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Painting1"], ["description", "Beautiful painting"], ["minimum_bid", 500], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-17 17:07:31 UTC], ["updated_at", 2017-02-17 17:07:31 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (24.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (125.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (122.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (329.0ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (242.8ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (6.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.1ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (5.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.8ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 09:42:55 UTC], ["updated_at", 2017-02-18 09:42:55 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ragini@ragini.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "ragini@ragini.com"], ["password_digest", "$2a$10$tUj//2FX5eq0w8ZlB9AF9.suIVo.fYeqYz34UrXM7R66Ue10YcukW"], ["first_name", "Ragini"], ["last_name", "Dua"], ["username", "raginidua"], ["created_at", 2017-02-18 09:46:58 UTC], ["updated_at", 2017-02-18 09:46:58 UTC], ["role", "Artist"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Painting1"], ["description", "Beautiful painting"], ["minimum_bid", 500], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 09:47:56 UTC], ["updated_at", 2017-02-18 09:47:56 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPiece Load (0.3ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces" WHERE "pieces"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPiece Load (0.2ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["piece_id", 1], ["created_at", 2017-02-18 09:52:51 UTC], ["updated_at", 2017-02-18 09:52:51 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBid Load (0.3ms)[0m  [1m[34mSELECT "bids".* FROM "bids" WHERE "bids"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddPriceToBid (20170218100343)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "bids" ADD "bid" integer[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170218100343"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddPriceToBid (20170218100454)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "bids" ADD "price" integer[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170218100454"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$EdG9OsVTtsmwpzKIjQAs/urqW1NpD2C9u.PDA1BPZv5DjKB5KwcJW"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:08:17 UTC], ["updated_at", 2017-02-18 10:08:17 UTC], ["role", "artist"], ["art_school", "st. martins"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled6"], ["description", "When walking through the foothills of India, I saw this scene..."], ["minimum_bid", 5000000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:11:36 UTC], ["updated_at", 2017-02-18 10:11:36 UTC]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPiece Load (1.3ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces" WHERE "pieces"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mPiece Load (0.2ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "bid", "price") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 2], ["piece_id", 2], ["created_at", 2017-02-18 10:12:35 UTC], ["updated_at", 2017-02-18 10:12:35 UTC], ["bid", 1], ["price", 5000001]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBid Load (0.4ms)[0m  [1m[34mSELECT "bids".* FROM "bids" WHERE "bids"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[36mBid Load (0.3ms)[0m  [1m[34mSELECT "bids".* FROM "bids" WHERE "bids"."piece_id" = $1[0m  [["piece_id", 2]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (121.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (120.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (287.9ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (242.3ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.2ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:34:42 UTC], ["updated_at", 2017-02-18 10:34:42 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (125.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (119.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (239.6ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (241.0ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:34:47 UTC], ["updated_at", 2017-02-18 10:34:47 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPiece Load (0.6ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+  [1m[36mBid Load (0.6ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "melissa@melissa.com"], ["password_digest", "$2a$10$YL9/NaqpLsflfDffSjr6T..CAdWUYupKPLpeSpVZvNdOQji/kBSPe"], ["first_name", "Melissa"], ["last_name", "Jones"], ["username", "melissa1"], ["created_at", 2017-02-18 10:34:47 UTC], ["updated_at", 2017-02-18 10:34:47 UTC], ["role", "artist"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "will@will.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "will@will.com"], ["password_digest", "$2a$10$BKclPc6cS0F2yM/PicvrFOFGEKTjQsaItDPdPX7xD.liUi.MY8ipC"], ["first_name", "Will"], ["last_name", "Petyon"], ["username", "willpeyton"], ["created_at", 2017-02-18 10:34:48 UTC], ["updated_at", 2017-02-18 10:34:48 UTC], ["role", "artist"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rahul@rahul.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "rahul@rahul.com"], ["password_digest", "$2a$10$bFiylUGT/vUpgtQ6mT0TXO8TaMW5CtFGH2KPzY4HH91uoYKaFfvca"], ["first_name", "Rahul"], ["last_name", "Seth"], ["username", "rahulseth"], ["created_at", 2017-02-18 10:34:48 UTC], ["updated_at", 2017-02-18 10:34:48 UTC], ["role", "customer"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$vLaFmIyWiN5oHdH5KrtxHuIPNxPbPnfbW88zAqfd2yVcvNQobM91i"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:34:48 UTC], ["updated_at", 2017-02-18 10:34:48 UTC], ["role", "customer"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (121.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (120.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (239.6ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (236.3ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:36:19 UTC], ["updated_at", 2017-02-18 10:36:19 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPiece Load (0.6ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+  [1m[36mBid Load (0.6ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "melissa@melissa.com"], ["password_digest", "$2a$10$jldXp6FIlcF0KwgX.bXP1eEeB4CTQDWmaarTNAs84FjPA72S94QLK"], ["first_name", "Melissa"], ["last_name", "Jones"], ["username", "melissa1"], ["created_at", 2017-02-18 10:36:19 UTC], ["updated_at", 2017-02-18 10:36:19 UTC], ["role", "artist"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "will@will.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "will@will.com"], ["password_digest", "$2a$10$K8uLS3YsQrncbxhXdrdVXe1/BZhpLADqyKC8Kg4vfoCFrRXP10M0W"], ["first_name", "Will"], ["last_name", "Petyon"], ["username", "willpeyton"], ["created_at", 2017-02-18 10:36:19 UTC], ["updated_at", 2017-02-18 10:36:19 UTC], ["role", "artist"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rahul@rahul.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "rahul@rahul.com"], ["password_digest", "$2a$10$ONyWH4LeBOTd2HncI9CF2uzIj4xRSTLq6.7rWmdMWk9Dc7u1obaB."], ["first_name", "Rahul"], ["last_name", "Seth"], ["username", "rahulseth"], ["created_at", 2017-02-18 10:36:19 UTC], ["updated_at", 2017-02-18 10:36:19 UTC], ["role", "customer"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$ZpjnCZH.Yrje92SUzFEXZusGEldnQy4sGmoXXxl0bn.7.CJ8qV5sK"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:36:19 UTC], ["updated_at", 2017-02-18 10:36:19 UTC], ["role", "customer"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (121.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (120.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (237.9ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (239.6ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:37:09 UTC], ["updated_at", 2017-02-18 10:37:09 UTC]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPiece Load (0.8ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+  [1m[36mBid Load (0.6ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+  [1m[35m (2.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "melissa@melissa.com"], ["password_digest", "$2a$10$gDaiSVkS3qmWopfI.GKVKuH3Pq//tUf5m7kvsknTXRuqVrfR05cqG"], ["first_name", "Melissa"], ["last_name", "Jones"], ["username", "melissa1"], ["created_at", 2017-02-18 10:37:09 UTC], ["updated_at", 2017-02-18 10:37:09 UTC], ["role", "artist"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "will@will.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "will@will.com"], ["password_digest", "$2a$10$qbdjf8pIdAPJwspdcW8Dxe26TXvXLqtMY539odffWtYa6vGTNm41W"], ["first_name", "Will"], ["last_name", "Petyon"], ["username", "willpeyton"], ["created_at", 2017-02-18 10:37:09 UTC], ["updated_at", 2017-02-18 10:37:09 UTC], ["role", "artist"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rahul@rahul.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "rahul@rahul.com"], ["password_digest", "$2a$10$VOX0ELMdGBmkzlvFfy.JNeIx2l4xaNOdSu49RBG993mjtmHdeO6cC"], ["first_name", "Rahul"], ["last_name", "Seth"], ["username", "rahulseth"], ["created_at", 2017-02-18 10:37:09 UTC], ["updated_at", 2017-02-18 10:37:09 UTC], ["role", "customer"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$wUw/j0yvlML5A2fW.KrwqOfTTfnxUStuN5jsjqgsQL7KzZk./OuXK"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:37:10 UTC], ["updated_at", 2017-02-18 10:37:10 UTC], ["role", "customer"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 1"], ["description", "An elegy in green"], ["minimum_bid", 5000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:37:10 UTC], ["updated_at", 2017-02-18 10:37:10 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 2"], ["description", "An elegy in blue"], ["minimum_bid", 3000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:37:10 UTC], ["updated_at", 2017-02-18 10:37:10 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 3"], ["description", "An elegy in yellow"], ["minimum_bid", 4000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:37:10 UTC], ["updated_at", 2017-02-18 10:37:10 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 4"], ["description", "An elegy in red"], ["minimum_bid", 8000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:37:10 UTC], ["updated_at", 2017-02-18 10:37:10 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 5"], ["description", "An elegy in purple"], ["minimum_bid", 9000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:37:10 UTC], ["updated_at", 2017-02-18 10:37:10 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddPriceToBid (20170218103808)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "bids" ADD "price" integer[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170218103808"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (121.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (121.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (240.9ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (238.9ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPriceToBid (20170218103808)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "bids" ADD "price" integer[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170218103808"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPiece Load (0.6ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+  [1m[36mBid Load (1.3ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "melissa@melissa.com"], ["password_digest", "$2a$10$0tfk5Pj1Z9Hripuobe3SQua4ibkGMRqGntIbJwkojROE7bLP5VGOC"], ["first_name", "Melissa"], ["last_name", "Jones"], ["username", "melissa1"], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC], ["role", "artist"], ["art_school", "St. Martins"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "will@will.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "will@will.com"], ["password_digest", "$2a$10$wWCFgb/aGOlEHmAj2lYJQO707hn1AsrA1pICUUtYszCCznLRBWg8q"], ["first_name", "Will"], ["last_name", "Petyon"], ["username", "willpeyton"], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC], ["role", "artist"], ["art_school", "St. Martins"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rahul@rahul.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "rahul@rahul.com"], ["password_digest", "$2a$10$P6Qf78CHVh6PmFQJnYwTkOFpjE1bPzYgrRAIfz1I057wMeVRTZsQa"], ["first_name", "Rahul"], ["last_name", "Seth"], ["username", "rahulseth"], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC], ["role", "customer"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$qA5H7n8UgaG4/CpVcaRmguPFRY8DyA9GJ5QxLGfv2nOI1wC6mm5mK"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC], ["role", "customer"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 1"], ["description", "An elegy in green"], ["minimum_bid", 5000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 2"], ["description", "An elegy in blue"], ["minimum_bid", 3000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:39:03 UTC], ["updated_at", 2017-02-18 10:39:03 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 3"], ["description", "An elegy in yellow"], ["minimum_bid", 4000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 4"], ["description", "An elegy in red"], ["minimum_bid", 8000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 5"], ["description", "An elegy in purple"], ["minimum_bid", 9000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 3], ["piece_id", 1], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC], ["price", 5500]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 3], ["piece_id", 2], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC], ["price", 3200]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 3], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC], ["price", 4100]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 4], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC], ["price", 8200]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 5], ["created_at", 2017-02-18 10:39:04 UTC], ["updated_at", 2017-02-18 10:39:04 UTC], ["price", 9100]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (121.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (123.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (240.9ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (239.8ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPriceToBid (20170218103808)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "bids" ADD "price" integer[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170218103808"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPiece Load (0.6ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+  [1m[36mBid Load (0.6ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "melissa@melissa.com"], ["password_digest", "$2a$10$5KjMho443xbMbNv0kwearu2hQtQO.6KC.GDKUZWeTSDNpIxFDm2Q2"], ["first_name", "Melissa"], ["last_name", "Jones"], ["username", "melissa1"], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["role", "artist"], ["art_school", "St. Martins"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "will@will.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "will@will.com"], ["password_digest", "$2a$10$0MReLUmsLXvuXBEbRF038uGIvzK2473hnvBxmcSjaiH2nhOdZJSYO"], ["first_name", "Will"], ["last_name", "Petyon"], ["username", "willpeyton"], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["role", "artist"], ["art_school", "St. Martins"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rahul@rahul.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "rahul@rahul.com"], ["password_digest", "$2a$10$FmSpGNg.qy4rRTtem32qIuYwuRX07rzQ6xr8VYHwJTCt4DYgRNYbe"], ["first_name", "Rahul"], ["last_name", "Seth"], ["username", "rahulseth"], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["role", "customer"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$YuyqZct8MNS3DoCLL/eHBeGyiToUchJlAJzjE5Yq0GfmUTpLh7FEG"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["role", "customer"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 1"], ["description", "An elegy in green"], ["minimum_bid", 5000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 2"], ["description", "An elegy in blue"], ["minimum_bid", 3000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 3"], ["description", "An elegy in yellow"], ["minimum_bid", 4000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 4"], ["description", "An elegy in red"], ["minimum_bid", 8000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 5"], ["description", "An elegy in purple"], ["minimum_bid", 9000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 3], ["piece_id", 1], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["price", 5500]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 3], ["piece_id", 2], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["price", 3200]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 3], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["price", 4100]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 4], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["price", 8200]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 5], ["created_at", 2017-02-18 10:39:58 UTC], ["updated_at", 2017-02-18 10:39:58 UTC], ["price", 9100]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (122.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_development"[0m
+  [1m[35m (121.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-3-api_test"[0m
+  [1m[35m (244.0ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (239.3ms)[0m  [1m[35mCREATE DATABASE "wdi-project-3-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8498434397098324980);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121227)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "first_name" character varying, "last_name" character varying, "username" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121227"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePieces (20170217161832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "pieces" ("id" serial primary key, "name" character varying, "title" character varying, "description" text, "minimum_bid" integer, "status" character varying, "closing_time" timestamp, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0cf5dbe553"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_pieces_on_user_id" ON "pieces"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217161832"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUser (20170217162832)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "role" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217162832"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddArtSchoolToUser (20170217163105)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "art_school" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163105"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBids (20170217163315)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "bids" ("id" serial primary key, "user_id" integer, "piece_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e173de2ed3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f0179d3176"
+FOREIGN KEY ("piece_id")
+  REFERENCES "pieces" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_user_id" ON "bids"  ("user_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_bids_on_piece_id" ON "bids"  ("piece_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170217163315"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPriceToBid (20170218103808)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "bids" ADD "price" integer[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170218103808"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8498434397098324980)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPiece Load (0.6ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+  [1m[36mBid Load (0.6ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "melissa@melissa.com"], ["password_digest", "$2a$10$zMDaGp1w6SRb3821lhEM7ejSFuoBimgJXwuUzi.29ct57ND7uDGv."], ["first_name", "Melissa"], ["last_name", "Jones"], ["username", "melissa1"], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["role", "artist"], ["art_school", "St. Martins"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "will@will.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role", "art_school") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "will@will.com"], ["password_digest", "$2a$10$QEOSlW41at6Xc0gANgBdhOjQbRHf066m6Ed47uJzYW5SX8zPitHt."], ["first_name", "Will"], ["last_name", "Petyon"], ["username", "willpeyton"], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["role", "artist"], ["art_school", "St. Martins"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rahul@rahul.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "rahul@rahul.com"], ["password_digest", "$2a$10$PBLWlbc4UyTaGPG6ZfO7ZehdT1UKUGmFUGOaV7fuT8aQl5cWouVbS"], ["first_name", "Rahul"], ["last_name", "Seth"], ["username", "rahulseth"], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["role", "customer"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shahil@shahil.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "first_name", "last_name", "username", "created_at", "updated_at", "role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["email", "shahil@shahil.com"], ["password_digest", "$2a$10$7wrxs.imsRHgeU9Ur7wcaeV.GAWx6IbAr5YFfArFu49MezSb2j65O"], ["first_name", "Shahil"], ["last_name", "Mehta"], ["username", "shahilmehta"], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["role", "customer"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 1"], ["description", "An elegy in green"], ["minimum_bid", 5000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 2"], ["description", "An elegy in blue"], ["minimum_bid", 3000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 3"], ["description", "An elegy in yellow"], ["minimum_bid", 4000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 1], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 4"], ["description", "An elegy in red"], ["minimum_bid", 8000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "pieces" ("name", "title", "description", "minimum_bid", "status", "closing_time", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Painting"], ["title", "Untitled 5"], ["description", "An elegy in purple"], ["minimum_bid", 9000], ["status", "open"], ["closing_time", 2017-12-31 17:00:00 UTC], ["user_id", 2], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 3], ["piece_id", 1], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["price", 5500]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 3], ["piece_id", 2], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["price", 3200]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 3], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["price", 4100]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 4], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["price", 8200]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "bids" ("user_id", "piece_id", "created_at", "updated_at", "price") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["piece_id", 5], ["created_at", 2017-02-18 10:47:37 UTC], ["updated_at", 2017-02-18 10:47:37 UTC], ["price", 9100]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/api/users" for 127.0.0.1 at 2017-02-18 10:49:54 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+ActionController::RoutingError (No route matches [GET] "/api/users"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.7.0) lib/puma/configuration.rb:226:in `call'
+puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.0) lib/puma/server.rb:415:in `process_client'
+puma (3.7.0) lib/puma/server.rb:275:in `block in run'
+puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users" for 127.0.0.1 at 2017-02-18 10:50:25 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.7.0) lib/puma/configuration.rb:226:in `call'
+puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.0) lib/puma/server.rb:415:in `process_client'
+puma (3.7.0) lib/puma/server.rb:275:in `block in run'
+puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:13:11 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"User"=>{"email"=>"ragini@ragini.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins"}, "authentication"=>{"User"=>{"email"=>"ragini@ragini.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (6.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 422 Unprocessable Entity in 65ms (Views: 9.6ms | ActiveRecord: 14.3ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:13:21 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"User"=>{"email"=>"ragini@ragini.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins"}, "authentication"=>{"User"=>{"email"=>"ragini@ragini.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 422 Unprocessable Entity in 6ms (Views: 1.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:13:40 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"User"=>{"email"=>"ragini10@ragini.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins"}, "authentication"=>{"User"=>{"email"=>"ragini10@ragini.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 422 Unprocessable Entity in 5ms (Views: 1.1ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:13:57 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"User"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}, "authentication"=>{"User"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 422 Unprocessable Entity in 5ms (Views: 1.0ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:14:00 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"user"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}, "authentication"=>{"user"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 422 Unprocessable Entity in 7ms (Views: 1.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:14:22 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"user"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}, "authentication"=>{"user"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.2ms)
+Completed 422 Unprocessable Entity in 5ms (Views: 0.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2017-02-18 11:14:53 +0000
+Processing by AuthenticationsController#register as */*
+  Parameters: {"user"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}, "authentication"=>{"user"=>{"password_confirmation"=>"[FILTERED]", "first_name"=>"Ragini", "last_name"=>"Dua", "username"=>"raginidua", "role"=>"artist", "art_school"=>"St. Martins", "email"=>"ragini10@ragini.com", "password"=>"[FILTERED]"}}}
+DEPRECATION WARNING: Method to_hash is deprecated and will be removed in Rails 5.1, as `ActionController::Parameters` no longer inherits from hash. Using this deprecated behavior exposes potential security problems. If you continue to use this method you may be creating a security vulnerability in your app that can be exploited. Instead, consider using one of these documented methods which are not deprecated: http://api.rubyonrails.org/v5.0.1/classes/ActionController/Parameters.html (called from merge! at /Users/raginidua/development/WDI_PROJECT_3_API/app/controllers/authentications_controller.rb:27)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 422 Unprocessable Entity in 4ms (Views: 0.4ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-02-18 11:17:09 +0000
+Processing by AuthenticationsController#login as */*
+  Parameters: {"email"=>"melissa@melissa.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"melissa@melissa.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "melissa@melissa.com"], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (5.33ms)
+Completed 200 OK in 77ms (Views: 5.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-02-18 11:17:23 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.7.0) lib/puma/configuration.rb:226:in `call'
+puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.0) lib/puma/server.rb:415:in `process_client'
+puma (3.7.0) lib/puma/server.rb:275:in `block in run'
+puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/pieces" for 127.0.0.1 at 2017-02-18 11:17:36 +0000
+Processing by PiecesController#index as */*
+  Parameters: {"email"=>"melissa@melissa.com", "password"=>"[FILTERED]", "piece"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPiece Load (0.5ms)[0m  [1m[34mSELECT "pieces".* FROM "pieces"[0m
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (21.42ms)
+Completed 200 OK in 38ms (Views: 32.4ms | ActiveRecord: 6.3ms)
+
+
+Started GET "/bids" for 127.0.0.1 at 2017-02-18 11:18:00 +0000
+Processing by BidsController#index as */*
+  Parameters: {"email"=>"melissa@melissa.com", "password"=>"[FILTERED]", "bid"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBid Load (0.6ms)[0m  [1m[34mSELECT "bids".* FROM "bids"[0m
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPiece Load (0.4ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPiece Load (0.3ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPiece Load (0.3ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPiece Load (0.3ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPiece Load (0.3ms)[0m  [1m[34mSELECT  "pieces".* FROM "pieces" WHERE "pieces"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (22.13ms)
+Completed 200 OK in 32ms (Views: 26.0ms | ActiveRecord: 6.9ms)
+
+
