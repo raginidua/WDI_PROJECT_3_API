@@ -1,5 +1,5 @@
 class PiecesController < ApplicationController
-  # skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!
   before_action :set_piece, only: [:show, :update, :destroy]
 
   # GET /pieces
@@ -47,6 +47,6 @@ class PiecesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def piece_params
-      params.require(:piece).permit(:name, :title, :description, :minimum_bid, :status, :closing_time, :user_id)
+      params.require(:piece).permit(:name, :title, :description, :minimum_bid, :status, :closing_time, :user_id, :image)
     end
 end
