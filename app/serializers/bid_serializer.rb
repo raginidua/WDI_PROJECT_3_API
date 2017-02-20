@@ -1,5 +1,5 @@
 class BidSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :price
   has_one :user
   has_one :piece
 end
