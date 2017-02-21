@@ -31,7 +31,9 @@ p12 = Piece.create! name: "Painting", title: "Pink Angels", description: "Abstra
 p13 = Piece.create! name: "Painting", title: "Woman 1", description: "Abstract", minimum_bid: 16000, status: "open", closing_time: "2017-12-31 17:00:00", user_id: u5.id, image: "https://uploads4.wikiart.org/images/willem-de-kooning/woman-i.jpg"
 
 b1 = Bid.create! user_id: u6.id, piece_id: p1.id, price: 5500
-b2 = Bid.create! user_id: u6id, piece_id: p2.id, price: 3200
+b7 = Bid.create! user_id: u6.id, piece_id: p1.id, price: 8500
+b6 = Bid.create! user_id: u7.id, piece_id: p1.id, price: 6500
+b2 = Bid.create! user_id: u6.id, piece_id: p2.id, price: 3200
 b3 = Bid.create! user_id: u7.id, piece_id: p3.id, price: 4100
 b4 = Bid.create! user_id: u7.id, piece_id: p4.id, price: 8200
 b5 = Bid.create! user_id: u7.id, piece_id: p5.id, price: 9100

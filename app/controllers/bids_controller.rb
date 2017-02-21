@@ -1,4 +1,5 @@
 class BidsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_bid, only: [:show, :update, :destroy]
 
   # GET /bids
@@ -15,7 +16,7 @@ class BidsController < ApplicationController
 
   # POST /bids
   def create
-    @bid = Bid.new(bid_params)
+    @bid = current_user.bids.new(bid_params)
 
     if @bid.save
       render json: @bid, status: :created, location: @bid
@@ -46,6 +47,6 @@ class BidsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bid_params
-      params.require(:bid).permit(:user_id, :piece_id)
+      params.require(:bid).permit(:user_id, :piece_id, :price)
     end
 end
