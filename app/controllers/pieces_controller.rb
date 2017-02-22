@@ -4,7 +4,7 @@ class PiecesController < ApplicationController
 
   # GET /pieces
   def index
-    @pieces = Piece.all
+    @pieces = Piece.where(status: 'open')
 
     render json: @pieces
   end
@@ -47,6 +47,7 @@ class PiecesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def piece_params
-      params.require(:piece).permit(:name, :title, :description, :minimum_bid, :status, :closing_time, :user_id, :image)
+      params.require(:piece).permit(:name, :title, :description, :minimum_bid, :status, :closing_time, :user_id, :image, :high_bidder)
     end
+
 end

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_user!
+  before_action :check_for_expiries
 
   def authenticate_user!
     render json: { errors: ["Unauthorized"] }, status: 401 unless user_signed_in?
@@ -28,6 +29,15 @@ class ApplicationController < ActionController::API
     def token
       @token ||= if request.headers['Authorization'].present?
         request.headers['Authorization'].split.last
+      end
+    end
+
+    def check_for_expiries
+      pieces = Piece.all.select { |piece| piece.closing_time < Time.now && piece.status == "open" }
+      pieces.each do |piece|
+        piece.update!(status: "closed")
+        piece.save!
+        p "The auction for #{piece.title} has now expired"
       end
     end
 end
