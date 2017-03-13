@@ -14,7 +14,7 @@ u9 = User.create! email: "marc@chagall.com", password: "password", password_conf
 
 p1 = Piece.create! name: "Painting", title: "Untitled", description: "A study of monochrome", minimum_bid: 5000, closing_time: Time.now + 60*60*24, user_id: u1.id, image: "https://static1.squarespace.com/static/564b52d2e4b0d9f6c73b6e92/t/5756f70d86db4318be7a85bc/1465318516890/"
 p2 = Piece.create! name: "Painting", title: "Untitled", description: "A study of monochrome", minimum_bid: 3000, closing_time: Time.now + 60*60, user_id: u1.id, image: "https://static1.squarespace.com/static/564b52d2e4b0d9f6c73b6e92/t/564b8447e4b0a2e58a09cfad/1447789645446/DavideBalliano_UNTITLED_7097_73_57_Low.jpg"
-p3 = Piece.create! name: "Painting", title: "Untitled", description: "A study of monochrome", minimum_bid: 4000, closing_time: Time.now + 60*60*2, user_id: u1.id, image: "https://static1.squarespace.com/static/564b52d2e4b0d9f6c73b6e92/t/564b86d5e4b04cb84dafd5d9/1447790299193/?format=500w"
+# p3 = Piece.create! name: "Painting", title: "Untitled", description: "A study of monochrome", minimum_bid: 4000, closing_time: Time.now + 60*60*2, user_id: u1.id, image: "https://static1.squarespace.com/static/564b52d2e4b0d9f6c73b6e92/t/564b86d5e4b04cb84dafd5d9/1447790299193/?format=500w"
 p4 = Piece.create! name: "Painting", title: "Untitled", description: "A study of monochrome", minimum_bid: 6000, closing_time: Time.now + 60*60*5, user_id: u1.id, image: "http://2.bp.blogspot.com/-0DomqY8hIGE/Vh31uR-O7AI/AAAAAAAAVzQ/EJGXrPEOyRU/s1600/4%2Bdaily%2Bimprint%2B-%2Bartist%2Bdavide%2Bballiano.jpg"
 
 
@@ -45,7 +45,7 @@ b1 = Bid.create! user_id: u6.id, piece_id: p1.id, price: 5500
 b2 = Bid.create! user_id: u7.id, piece_id: p1.id, price: 6500
 b3 = Bid.create! user_id: u6.id, piece_id: p1.id, price: 8500
 b4 = Bid.create! user_id: u6.id, piece_id: p2.id, price: 3200
-b5 = Bid.create! user_id: u7.id, piece_id: p3.id, price: 4100
+# b5 = Bid.create! user_id: u7.id, piece_id: p3.id, price: 4100
 b6 = Bid.create! user_id: u7.id, piece_id: p4.id, price: 6200
 b7 = Bid.create! user_id: u7.id, piece_id: p5.id, price: 8100
 b8 = Bid.create! user_id: u7.id, piece_id: p6.id, price: 10000
