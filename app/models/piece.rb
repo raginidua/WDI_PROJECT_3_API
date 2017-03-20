@@ -9,3 +9,6 @@ class Piece < ApplicationRecord
     self.status = "open"
   end
 end
+
+
+# Test
